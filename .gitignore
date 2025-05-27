@@ -1,3 +1,11 @@
-libs, 
-test.py,
-py/__pycache__,
+# Ordner komplett ignorieren
+libs
+
+# Nur __pycache__ ignorieren, auch in Unterordnern wie py/
+__pycache__/
+
+# Optional explizit auch für py/__pycache__/
+py/__pycache__/
+
+# Bestimmte Datei ignorieren
+test.py
