@@ -1,6 +1,17 @@
 {
-    "hostname": "ENC(gAAAAABoNiZ23Jr4WfTgoLMiRC45c7SFiFLS_fPkGdaUek67elnaCUnrnlA_H9-Izvg5HqR-hXfuUZhb6i3N6jouGYmj1KkOug==)",
-    "user": "ENC(gAAAAABoNiZ2UYCFdhFBRegIQxlwc5C5kMeKpyvIwGEBJHUUXxU04M9rWl72Wp_7nsReQ-TImhlRHtajDfaYumBOhu0VepNDng==)",
-    "anzahl": "ENC(gAAAAABoNiZ2mzLQJG3nFzQ3y8mfyKh3OjzHxNHfU1K556JYY2fkzgWSnyKpPdzHxAzEZU6Kbh0NBGAIJCalmm7ZckwTENGdbg==)",
-    "bool": "ENC(gAAAAABoNiZ2kRqMZsLMEwC_T0WbPxVBTRipnxXDgvO5uC6PDGAnLys4AJuMG--ZPWymxt1RuU_DN71Xb4Fj0VGqpheI4lue1g==)"
+    "hostname": "",
+    "database_user": "",
+    "database_password": "",
+    "date_format": "%m.%d.%Y_%H.%M.%S",
+    "backup_path": "",
+    "backup_count": "",
+    "databases": {},
+    "use_encryption": false,
+    "encryption_password": "",
+    "pack_to_zip": false,
+    "log_to_discord": false,
+    "log_to_discord_webhook": "",
+    "send_backup_to_discord": false,
+    "send_backup_to_discord_webhook": "",
+    "delete_local_backup": false
 }
