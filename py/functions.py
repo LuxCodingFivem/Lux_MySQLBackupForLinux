@@ -82,3 +82,18 @@ def save_settings(Settings):
 
     except Exception as e:
         print("Error by Saveing Settings: ", e)
+
+def encrypt_file():
+    ...
+
+def SQL():
+    ...
+
+def log_to_discord():
+    ...
+
+def pack_backup_to_zip():
+    ...
+
+def send_backup_to_discord():
+    ...
