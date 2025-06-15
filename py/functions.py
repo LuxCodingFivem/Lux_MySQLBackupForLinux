@@ -8,6 +8,12 @@ For full details, see the LICENSE file in the repository.
 """
 
 #Import Libs to for Genreating Key
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives.hashes import SHA256
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+from cryptography.hazmat.primitives import padding
+from cryptography.hazmat.backends import default_backend
 from cryptography.fernet import Fernet
 import os
 import json
@@ -53,7 +59,7 @@ def encrypt(plain_text):
 
 def decrypt(encrypted_text):
     try:
-        if encrypted_text.startswith("ENC(") and encrpted_text.endswith(")"):
+        if encrypted_text.startswith("ENC(") and encrypted_text.endswith(")"):
             encrypted_base64 = encrypted_text[4:-1]
             Fernet = Fernet(load_key())
             decrypt = Fernet.decrypt(encrypted_base64.encode())
@@ -83,8 +89,33 @@ def save_settings(Settings):
     except Exception as e:
         print("Error by Saveing Settings: ", e)
 
-def encrypt_file():
-    ...
+def derive_key(password, salt):
+    kdf = PBKDF2HMAC(
+        algorithm=SHA256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+        backend=default_backend()
+    )
+    return kdf.derive(password.encode())
+
+def encrypt_file(input_file, output_file, password):
+    salt = os.urandom(16)
+    key = derive_key(password, salt)
+    iv = os.urandom(16)
+    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    encryptor = cipher.encryptor()
+    padder = padding.PKCS7(algorithms.AES.block_size).padder()
+
+    with open(input_file, 'rb') as f:
+        plaintext = f.read()
+    padded_data = padder.update(plaintext) + padder.finalize()
+    ciphertext = encryptor.update(padded_data)
+    final_data = encryptor.finalize()
+    ciphertext += final_data
+
+    with open(output_file, 'wb') as f:
+        f.write(salt + iv + ciphertext)
 
 def SQL():
     ...
